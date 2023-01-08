@@ -19,3 +19,5 @@ class MinTerm {
 };
 
 std::vector<MinTerm> simplify(std::vector<MinTerm> &minTerms);
+std::vector<MinTerm> findImplicants(std::vector<MinTerm> &minTerms);
+std::map<int, std::vector<MinTerm>> groupByOnes(std::vector<MinTerm> &minTerms);

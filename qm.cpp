@@ -71,3 +71,27 @@ std::ostream &operator<<(std::ostream &os, const MinTerm &m) {
 }
 
 std::vector<MinTerm> simplify(std::vector<MinTerm> &minTerms) {}
+
+std::vector<MinTerm> findImplicants(std::vector<MinTerm> &minTerms) {
+    std::vector<MinTerm> implicants;
+    if (minTerms.size() == 0)
+        return implicants;
+    auto currSet = groupByOnes(minTerms);
+    bool changed = true;
+    while (changed) {
+        std::vector<MinTerm> newTerms;
+        auto last = std::prev(currSet.end());
+        for (auto it = currSet.begin(); it != last; it++) {
+            auto next = std::next(it);
+        }
+    }
+    return implicants;
+}
+std::map<int, std::vector<MinTerm>>
+groupByOnes(std::vector<MinTerm> &minTerms) {
+    std::map<int, std::vector<MinTerm>> groups;
+    for (auto &minTerm : minTerms) {
+        groups[minTerm.getOnesCount()].push_back(minTerm);
+    }
+    return groups;
+}
