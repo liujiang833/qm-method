@@ -17,11 +17,15 @@ std::vector<MinTerm> simplify(std::vector<MinTerm> &minTerms) {
     auto [remainingImlicants, remainingTerms] =
         findRemaingImplicantsAndMinTerms(implicantsAndCovers, minTerms,
                                          essentialImplicants);
-    if (remainingTerms.size() == 0)
-        return std::vector<MinTerm>(essentialImplicants.begin(),
-                                    essentialImplicants.end());
-    return petricksMethod(remainingImlicants, implicantsAndCovers,
-                          remainingTerms);
+    std::vector<MinTerm> res;
+    res.insert(res.end(), essentialImplicants.begin(),
+               essentialImplicants.end());
+    if (remainingTerms.size() != 0) {
+        auto nonEssentialUsed = petricksMethod(
+            remainingImlicants, implicantsAndCovers, remainingTerms);
+        res.insert(res.end(), nonEssentialUsed.begin(), nonEssentialUsed.end());
+    }
+    return res;
 }
 
 std::vector<MinTerm> petricksMethod(
