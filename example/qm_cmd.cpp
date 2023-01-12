@@ -67,11 +67,18 @@ int main() {
     std::string symbolStr;
     std::getline(std::cin, symbolStr);
     std::vector<std::string> symbols = split(symbolStr);
-    auto minterms = toMinTerms(symbols);
+    std::vector<MinTerm> minterms;
+    try {
+        minterms = toMinTerms(symbols);
+    } catch (std::string &e) {
+        std::cout << e << "\n";
+        return 1;
+    }
     auto simplified = simplify(minterms);
     auto simplifiedSymbols = toSymbols(getVocab(symbols[0]), simplified);
     std::cout << "Simplifed experssion is:\n";
     for (auto &symbol : simplifiedSymbols)
         std::cout << symbol << " ";
     std::cout << "\n";
+    return 0;
 }
