@@ -1,4 +1,4 @@
-#include "qm.h"
+#include "../src/qm.h"
 #include <algorithm>
 #include <iostream>
 template <typename myMap>
@@ -81,7 +81,11 @@ void testFindImplicant2() {
 void testSimplify() {
     std::vector<MinTerm> minterms = {"0000", "0001", "0010", "1000", "0101",
                                      "0110", "1001", "1010", "0111", "1110"};
-    std::cout << simplify(minterms);
+    auto simplified = simplify(minterms);
+    std::sort(simplified.begin(), simplified.end());
+    std::vector<MinTerm> expect = {"-00-", "--10", "01-1"};
+    std::sort(expect.begin(), expect.end());
+    assert_equal(expect, simplified);
 }
 int main() {
     testFindImplicant1();
